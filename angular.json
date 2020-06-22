@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "projects": {
+    "ng-lint-exclude-nx": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/ng-lint-exclude-nx",
+      "sourceRoot": "apps/ng-lint-exclude-nx/src",
+      "prefix": "ng-lint-exclude-nx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ng-lint-exclude-nx",
+            "index": "apps/ng-lint-exclude-nx/src/index.html",
+            "main": "apps/ng-lint-exclude-nx/src/main.ts",
+            "polyfills": "apps/ng-lint-exclude-nx/src/polyfills.ts",
+            "tsConfig": "apps/ng-lint-exclude-nx/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/ng-lint-exclude-nx/src/favicon.ico",
+              "apps/ng-lint-exclude-nx/src/assets"
+            ],
+            "styles": ["apps/ng-lint-exclude-nx/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ng-lint-exclude-nx/src/environments/environment.ts",
+                  "with": "apps/ng-lint-exclude-nx/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-lint-exclude-nx:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-lint-exclude-nx:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-lint-exclude-nx:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ng-lint-exclude-nx/tsconfig.app.json",
+              "apps/ng-lint-exclude-nx/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/ng-lint-exclude-nx/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/ng-lint-exclude-nx/jest.config.js",
+            "tsConfig": "apps/ng-lint-exclude-nx/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/ng-lint-exclude-nx/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "ng-lint-exclude-nx-e2e": {
+      "root": "apps/ng-lint-exclude-nx-e2e",
+      "sourceRoot": "apps/ng-lint-exclude-nx-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ng-lint-exclude-nx-e2e/cypress.json",
+            "tsConfig": "apps/ng-lint-exclude-nx-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ng-lint-exclude-nx:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-lint-exclude-nx:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/ng-lint-exclude-nx-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/ng-lint-exclude-nx-e2e/**/*"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": "094f04d8-2d13-4cd2-93df-b6112668c128"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "ng-lint-exclude-nx"
+}
