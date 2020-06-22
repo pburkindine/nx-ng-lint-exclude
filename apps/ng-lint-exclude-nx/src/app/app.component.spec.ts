@@ -1,4 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
+import {
+  async,
+  TestBed
+} from '@angular/core/testing';
+
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -12,6 +16,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+
+    console.log(416);
   });
 
   it(`should have as title 'ng-lint-exclude-nx'`, () => {

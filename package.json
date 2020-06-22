@@ -10,6 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
+    "lint-files": "ng lint --exclude \"**/{*.spec,*.stub,*.mock,mocks}.ts\"",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
